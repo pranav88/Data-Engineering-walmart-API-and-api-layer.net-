@@ -19,3 +19,19 @@ To build an end-to-end data engineering system that would use live streaming dat
 
 ## Robustness and Fault Tolerance
 - The whole system was fairly robust although there were issues at times with the EMR pipe beaking. The whole process of setting up the cluster and installing the dependencies everytime was not viable. json.loads() did throw a value error at times while loading the data from S3 , we made a workaround by putting the statement in a try and except clause where except just made a pass.
+
+## currency_firehose.py
+- This script is used to get the data using the currency api and then to put it into Amazon s3 using the amazon kinesis firehose with boto3 as the client.A timestamp is also added as the data is updated once every day.We use the put_record method to add the data to s3 using the boto client through the kinesis firehose. The data is of the json format and has the currency exchange rates with respect to us dollars for a select few countries.
+
+## wal_trending.py and walvod.py
+- These scripts are used to get the top trending items and the top item for each day respectively. The obtained data is then added to kinesis firehose similar to how the currency data was added using the boto3 client. A timestamp is added as well as the data is updated once everyday.
+- The scripts add data to three different buckets in order to easily differentiate between them.
+
+## The data_enginnering.ipynb notebook
+- The entire architecture was set up on a Spark EMR cluster , the notebook was set up on this EMR similarly , the notebook has code that was tried and tested before making them into python scripts. The notebook has explanations for the blocks of code that were put together.It also contans code where the data has been put into mongoDB.
+
+## mongo_flask.py
+- The code to set up the front end , The Flask App. We use pymongo the mongoclient to get data from mongoDB(A no SQL database).The flask app has been setup on the EMR as well , we specify the host to be 0.0.0.0 to make the app accessible from the EMR.We have to specify our end point for the EMR as well while using the IP address.After running the script , we enter the URL on a new tab to find the top 25 items displayed over the course of a week through the FLASK app.
+
+## discount.py and spyre_vis.py
+- 
