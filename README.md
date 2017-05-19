@@ -1,5 +1,5 @@
 # Data-Engineering-walmart-API-and-api-layer.net-
-Setting up a pipeline to combine two api's and analysis on the same
+Setting up a pipeline to combine two api's and carry out analysis on the data obtained
 ## Motivation
 To build an end-to-end data engineering system that would use live streaming data and produce meaningful results on the same.
 
